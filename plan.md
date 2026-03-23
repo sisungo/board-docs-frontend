@@ -126,7 +126,7 @@ const enFiles = import.meta.glob("/<content>/*/README_en.md", {
 
 ## Phase 3: 首页 (Fedora 式布局)
 
-**目标**：左侧板子树形筛选 + 右侧示例卡片网格 + 顶栏搜索。参照 `design.md` §3 §10 的 ASCII 线框。
+**目标**：左侧板子树形筛选 + 右侧示例卡片网格 + 顶栏搜索。参照 `design.md` §3 §11 的 ASCII 线框。
 
 1. 布局壳 `src/layouts/Layout.astro`：顶栏标题「RuyiSDK Examples」+ 搜索框 + `<slot/>`
 2. `src/components/ExampleCard.tsx`（React）：标题、分类标签、支持的板子摘要；点击跳转 `/examples/[slug]`
@@ -178,7 +178,7 @@ const enFiles = import.meta.glob("/<content>/*/README_en.md", {
 
 - [ ] `pnpm build` 通过
 - [ ] Mac SSH 隧道 + Chrome `http://localhost:3000`：首页加载正常
-- [ ] 首页：搜索 + 左侧板子筛选 + 右侧卡片网格（`design.md` §3 §10）
+- [ ] 首页：搜索 + 左侧板子筛选 + 右侧卡片网格（`design.md` §3 §11）
 - [ ] 卡片点击 → 详情页：Markdown 渲染 + 支持的板子列表
 - [ ] 中英文切换可用
 - [ ] 未修改 `support-matrix-frontend` 源码
