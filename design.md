@@ -149,7 +149,10 @@ ruyisdk-examples-frontend/
 Agent 在 Linux 上开发，用户在 Mac 上通过 SSH 隧道用 Chrome 人眼验收。
 
 ```bash
-# Mac 终端
+# Linux（仓库根目录，固定端口 3000；会先尝试释放 3000 上旧进程，避免 Vite 改到 3001/3002）
+pnpm dev
+
+# Mac 终端（SSH 本地转发）
 ssh -L 3000:localhost:3000 fengde@100.90.186.53
 # 然后 Chrome 打开 http://localhost:3000
 ```

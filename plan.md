@@ -5,6 +5,8 @@
 
 **协作与 Git**：文档落盘、每个 Phase 结束一次 commit（成败皆提交）等约定见 **`.cursor/rules/ruyisdk-examples-workflow.mdc`**（Cursor 全局生效）；`design.md` §9 为人眼验收口径。
 
+**进度快照**：Phase 1–2 已交付；**Phase 3 已完成** — `src/layouts/Layout.astro`（HTML 壳 + 全局样式）、`ExamplesHome`（顶栏标题与搜索）、`ExampleSidebar`（Accordion「按板子」+ 全部/单板筛选）、`ExampleCard`（分类标签 + 板子摘要，链到 `/examples/[slug]/`）；`pnpm build` 通过。下一步为 Phase 4（详情页与双语）。
+
 ---
 
 ## 环境
@@ -15,13 +17,15 @@
 | 人眼验收 (Chrome) | Mac | `100.114.70.79` |
 
 ```bash
-# Agent 启动 dev server（Linux）
-pnpm dev --host 0.0.0.0 --port 3000
+# Agent 启动 dev server（Linux）— 固定 3000：`pnpm dev` 会先尝试释放 3000 再启动；若不想杀进程用 `pnpm dev:only`
+pnpm dev
 
 # 用户建 SSH 隧道（Mac）
 ssh -L 3000:localhost:3000 fengde@100.90.186.53
 # Mac Chrome → http://localhost:3000
 ```
+
+`astro.config.mjs` 中 `vite.server` 已设 `port: 3000`、`strictPort: true`，避免静默改端口；端口仍被占用时先执行 `pnpm dev`（会 `fuser`/`lsof` 释放 3000）或手动：`fuser -k 3000/tcp`。
 
 构建与测试在 Linux：`pnpm build`、`pnpm exec playwright test`。
 

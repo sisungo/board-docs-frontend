@@ -1,51 +1,18 @@
 ---
-import "../styles/global.css";
-import { getAllExamples } from "../lib/examples";
+import ExamplesHome from "../components/ExamplesHome";
+import Layout from "../layouts/Layout.astro";
 import { aggregateBoards } from "../lib/boards";
+import { getAllExamples } from "../lib/examples";
 
 const examples = getAllExamples();
 const boards = aggregateBoards(examples);
+
 if (import.meta.env.DEV) {
   console.log("[examples]", examples);
   console.log("[boards]", boards);
 }
 ---
 
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>RuyiSDK Examples</title>
-  </head>
-  <body class="bg-slate-50 text-slate-900">
-    <main class="mx-auto max-w-3xl p-6">
-      <h1 class="mb-2 text-2xl font-semibold">RuyiSDK Examples</h1>
-      <p class="mb-6 text-slate-600">Phase 2：数据层已接入 test-doc（控制台可查看 <code>[examples]</code>）</p>
-
-      <section class="mb-8 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-        <h2 class="mb-2 font-medium">示例（{examples.length}）</h2>
-        <ul class="list-inside list-disc space-y-1 text-sm">
-          {
-            examples.map((ex) => (
-              <li>
-                <span class="font-mono text-slate-700">{ex.slug}</span> — {ex.title}
-                <span class="text-slate-500">
-                  （{ex.category}
-                  {ex.boards.length ? ` · ${ex.boards.join(", ")}` : ""}）
-                </span>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-
-      <section class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-        <h2 class="mb-2 font-medium">板子聚合（{boards.length}）</h2>
-        <p class="font-mono text-sm text-slate-700">{boards.join(" · ")}</p>
-      </section>
-    </main>
-  </body>
-</html>
+<Layout title="RuyiSDK Examples">
+  <ExamplesHome client:load examples={examples} boards={boards} />
+</Layout>

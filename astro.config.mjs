@@ -9,6 +9,11 @@ export default defineConfig({
   integrations: [react()],
 
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+    server: {
+      port: 3000,
+      strictPort: true,
+      host: true,
+    },
+  },
 });
