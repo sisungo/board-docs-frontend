@@ -3,6 +3,8 @@
 给 AI Agent 的可执行实施手册。**依据 `design.md`**，逐步构建独立站点。  
 约束：不修改 `support-matrix-frontend` 源码（submodule 只读参考）。
 
+**协作与 Git**：文档落盘、每个 Phase 结束一次 commit（成败皆提交）等约定见 **`.cursor/rules/ruyisdk-examples-workflow.mdc`**（Cursor 全局生效）；`design.md` §9 为人眼验收口径。
+
 ---
 
 ## 环境

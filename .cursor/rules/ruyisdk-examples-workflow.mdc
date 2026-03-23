@@ -1,0 +1,24 @@
+---
+description: 文档落盘、阶段提交；与本仓库 Agent 协作时必须遵守
+alwaysApply: true
+---
+
+# RuyiSDK Examples — 协作规则
+
+## 1. 文档必须写入仓库
+
+- 若本轮对话中 **`design.md`、`plan.md`、`learn.md`** 任一需要变更，**必须**用编辑工具写入对应文件，**禁止**仅口头说明「已更新」或只贴摘要。
+- 若多处同时需要改，**全部改完再结束回复**；不要留「待你手动粘贴」。
+
+## 2. 按 Phase 提交 Git（每个阶段一次 commit）
+
+- 开发以 `plan.md` 中的 **Phase 1–5** 为里程碑。
+- **每完成一个 Phase**（无论该阶段结果是成功还是失败）：在仓库根目录执行 **一次 `git commit`**，把工作树中该阶段相关改动全部纳入。
+- **成功**：commit message 写明 `phase N: <简短成果>`，例如 `phase 3: homepage layout with sidebar and cards`。
+- **失败**：同样 commit，message 写明 `phase N: wip failed - <原因或下一步>`，便于回溯与对比。
+- 不在同一 Phase 内拆成多个无意义的 commit；**不**跨 Phase 攒一个大 commit（除非 Phase 未开始且只做文档）。
+
+## 3. 与 `design.md` 的关系
+
+- 产品意图、验收口径以 **`design.md`** 为准；实施步骤以 **`plan.md`** 为准。
+- 若规则与 `design.md` / `plan.md` 冲突，以 **仓库内 md 文件** 为准，并应更新 md 消除矛盾。

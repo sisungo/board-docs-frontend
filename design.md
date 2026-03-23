@@ -154,6 +154,8 @@ ssh -L 3000:localhost:3000 fengde@100.90.186.53
 # 然后 Chrome 打开 http://localhost:3000
 ```
 
+**协作与 Git 约定**（文档必须落盘、每 Phase 一次 commit 等）：见仓库 **`.cursor/rules/ruyisdk-examples-workflow.mdc`**。
+
 按 Phase 划分，每个 Phase 完成后 Agent 通知用户验收：
 
 ### Phase 1：脚手架
