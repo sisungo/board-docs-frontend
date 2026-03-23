@@ -32,9 +32,21 @@ const contentHtml = await renderMarkdownToHtml(md);
 
 <Layout title={`${ex.title} — ${board.product}`}>
   <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-    <!-- Breadcrumb -->
+    <!-- Breadcrumb: 首页 / 厂商 / 芯片 / 板子 / 示例 -->
     <nav class="text-muted-foreground mb-6 text-sm">
       <a href="/" class="hover:text-foreground underline-offset-4 hover:underline">首页</a>
+      {board.vendor && (
+        <>
+          <span class="mx-1.5 select-none">/</span>
+          <span>{board.vendor}</span>
+        </>
+      )}
+      {board.cpu && (
+        <>
+          <span class="mx-1.5 select-none">/</span>
+          <span>{board.cpu}</span>
+        </>
+      )}
       <span class="mx-1.5 select-none">/</span>
       <a
         href={`/boards/${encodeURIComponent(board.slug)}/`}

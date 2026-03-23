@@ -170,11 +170,11 @@ ssh -L 3000:localhost:3000 fengde@100.90.186.53
 
 ### 视觉打磨（必做）
 
-3. **去掉首页左侧 Sidebar**：板子只有 2–3 块时 Sidebar 显得空旷。改为纯卡片网格 + 顶部居中搜索（`docs/design.md` §12）
-4. **首页 hero 区**：大标题 + 副标题 + 居中搜索框，`py-12 sm:py-16`
+3. **首页侧栏改为厂商→芯片→板子可折叠树**：参照 matrix 站点侧栏风格，桌面端显示，移动端隐藏（`docs/design.md` §12）
+4. **首页 hero 区**：大标题 + 副标题 + 居中搜索框，`py-10 sm:py-14`
 5. **板子卡片微动效**：`hover:shadow-md` + `hover:-translate-y-0.5 transition`
-6. **板子详情页**：面包屑 + header + 分割线 + 示例表格（目录名 + Badge + 日期），全行可点击
-7. **示例详情页**：面包屑 + meta 区 + 分割线 + prose 排版；图片 `rounded-lg shadow-sm max-w-full`；代码块圆角 + 语言标签
+6. **板子详情页**：面包屑（首页/厂商/芯片/板子）+ header + 分割线 + 示例表格（目录名 + Badge + 日期），全行可点击
+7. **示例详情页**：面包屑（首页/厂商/芯片/板子/示例）+ meta 区 + 分割线 + prose 排版；图片 `rounded-lg shadow-sm max-w-full`；代码块圆角 + 语言标签
 8. **全局**：页面 `max-w-6xl` 居中，统一间距 `px-4 sm:px-6`
 
 **验证**：`pnpm build` 通过；Mac Chrome 人眼确认首页板子卡片美观可辨、板子详情示例名正确、示例详情 Markdown 排版舒适。

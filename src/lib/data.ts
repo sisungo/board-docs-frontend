@@ -111,6 +111,42 @@ function buildExampleMeta(globKey: string, raw: string, boardSlug: string, examp
   };
 }
 
+/** Chip node: groups boards sharing the same CPU under one vendor. */
+export type ChipGroup = {
+  cpu: string;
+  boards: BoardMeta[];
+};
+
+/** Vendor node: top-level grouping. */
+export type VendorGroup = {
+  vendor: string;
+  chips: ChipGroup[];
+};
+
+/** Build the vendor → chip → board tree from a flat board list. */
+export function groupBoardsByVendorChip(boards: BoardMeta[]): VendorGroup[] {
+  const vendorMap = new Map<string, Map<string, BoardMeta[]>>();
+  for (const b of boards) {
+    const v = b.vendor || "Other";
+    const c = b.cpu || "Unknown";
+    if (!vendorMap.has(v)) vendorMap.set(v, new Map());
+    const chipMap = vendorMap.get(v)!;
+    if (!chipMap.has(c)) chipMap.set(c, []);
+    chipMap.get(c)!.push(b);
+  }
+  return Array.from(vendorMap.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([vendor, chipMap]) => ({
+      vendor,
+      chips: Array.from(chipMap.entries())
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([cpu, boards]) => ({
+          cpu,
+          boards: boards.sort((a, b) => a.product.localeCompare(b.product)),
+        })),
+    }));
+}
+
 let cacheBoards: BoardMeta[] | null = null;
 
 export function getAllBoards(): BoardMeta[] {

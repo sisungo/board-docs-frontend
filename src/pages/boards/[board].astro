@@ -23,9 +23,21 @@ const introHtml = introMd ? await renderMarkdownToHtml(introMd) : "";
 
 <Layout title={`${board.product} — RuyiSDK Examples`}>
   <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-    <!-- Breadcrumb -->
+    <!-- Breadcrumb: 首页 / 厂商 / 芯片 / 板子 -->
     <nav class="text-muted-foreground mb-6 text-sm">
       <a href="/" class="hover:text-foreground underline-offset-4 hover:underline">首页</a>
+      {board.vendor && (
+        <>
+          <span class="mx-1.5 select-none">/</span>
+          <span>{board.vendor}</span>
+        </>
+      )}
+      {board.cpu && (
+        <>
+          <span class="mx-1.5 select-none">/</span>
+          <span>{board.cpu}</span>
+        </>
+      )}
       <span class="mx-1.5 select-none">/</span>
       <span class="text-foreground font-medium">{board.product}</span>
     </nav>
