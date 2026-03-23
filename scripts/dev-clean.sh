@@ -9,4 +9,4 @@ elif command -v lsof >/dev/null 2>&1; then
     kill -9 ${PIDS} 2>/dev/null || true
   fi
 fi
-exec pnpm exec astro dev
+exec pnpm exec astro dev --port "${PORT}" --host
