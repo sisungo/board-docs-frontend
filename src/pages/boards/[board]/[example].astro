@@ -1,0 +1,59 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import Layout from "../../../layouts/Layout.astro";
+import { getAllBoards, getBoardBySlug, getExampleMarkdownBody, getExampleMeta } from "../../../lib/data";
+import { renderMarkdownToHtml } from "../../../lib/renderMarkdown";
+import { STATUS_LABEL_ZH } from "../../../lib/status-labels";
+
+export const getStaticPaths: GetStaticPaths = () => {
+  const paths: { params: { board: string; example: string } }[] = [];
+  for (const b of getAllBoards()) {
+    for (const e of b.examples) {
+      paths.push({ params: { board: b.slug, example: e.slug } });
+    }
+  }
+  return paths;
+};
+
+const boardSlug = Astro.params.board!;
+const exampleSlug = Astro.params.example!;
+
+const board = getBoardBySlug(boardSlug);
+const ex = getExampleMeta(boardSlug, exampleSlug);
+const md = ex ? getExampleMarkdownBody(boardSlug, exampleSlug) : undefined;
+
+if (!board || !ex || !md) {
+  return Astro.redirect(board ? `/boards/${encodeURIComponent(board.slug)}/` : "/");
+}
+
+const contentHtml = await renderMarkdownToHtml(md);
+---
+
+<Layout title={`${ex.title} — ${board.product}`}>
+  <div class="mx-auto max-w-4xl px-4 py-8 sm:px-6">
+    <nav class="text-muted-foreground mb-6 text-sm">
+      <a href="/" class="hover:text-foreground underline-offset-4 hover:underline">首页</a>
+      <span class="mx-2">/</span>
+      <a href={`/boards/${encodeURIComponent(board.slug)}/`} class="hover:text-foreground underline-offset-4 hover:underline">
+        {board.product}
+      </a>
+      <span class="mx-2">/</span>
+      <span class="text-foreground">{ex.title}</span>
+    </nav>
+
+    <header class="mb-8">
+      <p class="text-muted-foreground mb-1 text-sm">{board.product}</p>
+      <h1 class="text-foreground mb-3 text-3xl font-semibold tracking-tight">{ex.title}</h1>
+      <div class="text-muted-foreground flex flex-wrap gap-2 text-sm">
+        <span class="bg-secondary text-secondary-foreground rounded-md px-2 py-0.5 text-xs">
+          {STATUS_LABEL_ZH[ex.status]}
+        </span>
+        {ex.sys ? <span>系统：{ex.sys}</span> : null}
+        {ex.lastUpdate ? <span>更新：{ex.lastUpdate}</span> : null}
+      </div>
+    </header>
+
+    <article class="prose prose-slate dark:prose-invert max-w-none" set:html={contentHtml} />
+  </div>
+</Layout>

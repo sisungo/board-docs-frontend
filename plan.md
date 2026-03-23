@@ -5,7 +5,7 @@
 
 **协作与 Git**：文档落盘、每个 Phase 结束一次 commit（成败皆提交）等约定见 **`.cursor/rules/ruyisdk-examples-workflow.mdc`**（Cursor 全局生效）；`design.md` §9 为人眼验收口径。
 
-**进度快照**：Phase 1 已交付（脚手架 + submodule）。Phase 2–3 旧版已完成但基于错误的数据模型（示例优先），现已修正为**板子优先**模型。从 Phase 2 开始按新模型重新实现。
+**进度快照**：Phase 1 已交付。内容模型为 **板子 → 示例**（见 `design.md` §4）。**Phase 4（板子详情 + 示例 Markdown 详情）已实现**：路由 `/`、`/boards/[board]/`、`/boards/[board]/[example]/`；`src/lib/data.ts` 扫描 `test-doc/*/*/*.md`；`public/test-doc` 指向内容目录以提供图片；`renderMarkdown.ts`（remark-gfm + rehype-pretty-code）。首页为板子卡片（非「每板一条示例」的旧 UI）。
 
 ---
 
@@ -181,7 +181,7 @@ ssh -L 3000:localhost:3000 fengde@100.90.186.53
 
 ## 验收清单
 
-- [ ] `pnpm build` 通过
+- [x] `pnpm build` 通过
 - [ ] Mac SSH 隧道 + Chrome `http://localhost:3000`：首页加载正常
 - [ ] 首页：板子卡片网格 + 搜索过滤（`design.md` §3 §11）
 - [ ] 点击板子卡片 → 板子详情页：显示示例列表

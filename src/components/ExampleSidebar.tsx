@@ -2,17 +2,19 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+export type BoardOption = { slug: string; label: string };
+
 export type ExampleSidebarProps = {
-  boards: string[];
-  selectedBoard: string | null;
-  onSelectBoard: (board: string | null) => void;
+  boardOptions: BoardOption[];
+  selectedSlug: string | null;
+  onSelectSlug: (slug: string | null) => void;
   className?: string;
 };
 
 export function ExampleSidebar({
-  boards,
-  selectedBoard,
-  onSelectBoard,
+  boardOptions,
+  selectedSlug,
+  onSelectSlug,
   className,
 }: ExampleSidebarProps) {
   return (
@@ -30,23 +32,23 @@ export function ExampleSidebar({
               <div className="flex max-h-[min(60vh,28rem)] flex-col gap-1 overflow-y-auto pr-1">
                 <Button
                   type="button"
-                  variant={selectedBoard === null ? "secondary" : "ghost"}
+                  variant={selectedSlug === null ? "secondary" : "ghost"}
                   size="sm"
                   className="w-full justify-start"
-                  onClick={() => onSelectBoard(null)}
+                  onClick={() => onSelectSlug(null)}
                 >
                   全部
                 </Button>
-                {boards.map((b) => (
+                {boardOptions.map((b) => (
                   <Button
-                    key={b}
+                    key={b.slug}
                     type="button"
-                    variant={selectedBoard === b ? "secondary" : "ghost"}
+                    variant={selectedSlug === b.slug ? "secondary" : "ghost"}
                     size="sm"
                     className="w-full justify-start text-left font-normal"
-                    onClick={() => onSelectBoard(b)}
+                    onClick={() => onSelectSlug(b.slug)}
                   >
-                    {b}
+                    {b.label}
                   </Button>
                 ))}
               </div>

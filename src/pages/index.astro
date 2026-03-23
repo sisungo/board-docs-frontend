@@ -1,18 +1,15 @@
 ---
-import ExamplesHome from "../components/ExamplesHome";
+import BoardsHome from "../components/BoardsHome";
 import Layout from "../layouts/Layout.astro";
-import { aggregateBoards } from "../lib/boards";
-import { getAllExamples } from "../lib/examples";
+import { getAllBoards } from "../lib/data";
 
-const examples = getAllExamples();
-const boards = aggregateBoards(examples);
+const boards = getAllBoards();
 
 if (import.meta.env.DEV) {
-  console.log("[examples]", examples);
   console.log("[boards]", boards);
 }
 ---
 
 <Layout title="RuyiSDK Examples">
-  <ExamplesHome client:load examples={examples} boards={boards} />
+  <BoardsHome client:load boards={boards} />
 </Layout>
