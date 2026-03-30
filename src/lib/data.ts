@@ -344,8 +344,24 @@ function boardReadmeKey(slug: string, kind: "en" | "zh"): string | undefined {
 export function stripDuplicateHeading(body: string, product: string): string {
   const m = body.match(/^(#\s+(.+))(\r?\n)/);
   if (!m) return body;
-  const heading = m[2].trim();
-  if (heading === product || heading === product.trim()) {
+  const normalize = (s: string) =>
+    s
+      .replace(/\u00a0/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+  const stripTrailingParens = (s: string) =>
+    s
+      // English parentheses suffix: "Foo (64M)"
+      .replace(/\s*\([^)]*\)\s*$/g, "")
+      // Chinese parentheses suffix: "Foo（64M）"
+      .replace(/\s*（[^）]*）\s*$/g, "")
+      .trim();
+  const heading = normalize(m[2]);
+  const prod = normalize(product);
+  const headingNoParens = normalize(stripTrailingParens(m[2]));
+  const prodNoParens = normalize(stripTrailingParens(product));
+  if (heading === prod || headingNoParens === prod || heading === prodNoParens || headingNoParens === prodNoParens) {
     return body.slice(m[0].length).trimStart();
   }
   return body;
