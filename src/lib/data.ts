@@ -1,6 +1,6 @@
 import { parse as parseYaml } from "yaml";
 
-export type ExampleStatus = "basics" | "peripheral" | "others";
+export type ExampleStatus = "basics" | "peripheral" | "benchmark" | "application";
 
 export type ExampleMeta = {
   boardSlug: string;
@@ -73,8 +73,12 @@ function firstHeading(body: string): string | undefined {
 }
 
 function normalizeStatus(raw: unknown): ExampleStatus {
-  if (raw === "basics" || raw === "peripheral" || raw === "others") return raw;
-  return "others";
+  if (raw === "basics" || raw === "peripheral" || raw === "benchmark" || raw === "application") {
+    return raw;
+  }
+  /** @deprecated 旧稿用 others，现并入性能评测 */
+  if (raw === "others") return "benchmark";
+  return "application";
 }
 
 function parseBoardSlugFromReadmeKey(key: string): string | null {

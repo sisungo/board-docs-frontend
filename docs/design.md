@@ -107,12 +107,12 @@ soc_vendor: Sophgo          # 芯片厂商（Silicon Vendor），侧栏第一层
 sys: buildroot
 sys_ver: v1.1.4
 sys_var: v1
-status: basics          # basics | peripheral | others
+status: basics          # basics | peripheral | benchmark | application
 last_update: 2025-03-19
 ---
 ```
 
-`status` 字段用作分类：`basics` = 基础示例，`peripheral` = 外设示例，`others` = 其他。
+`status` 字段用作分类：`basics` = 基础示例，`peripheral` = 外设示例，`benchmark` = 性能评测（跑分、基准测试等），`application` = 应用与综合（系统、大模型、复杂案例等）。旧稿中的 `others` 在解析时视为 `benchmark`（兼容）。
 
 ### 示例文件名约定
 
@@ -129,9 +129,10 @@ last_update: 2025-03-19
 
 | status 值 | 分类名 | 含义 |
 | --- | --- | --- |
-| `basics` | 基础示例 | Hello World、Coremark 等入门程序 |
+| `basics` | 基础示例 | Hello World、环境跑通等入门程序 |
 | `peripheral` | 外设示例 | GPIO、LED、ePaper 等硬件外设 |
-| `others` | 其他 | Dhrystone 等额外示例 |
+| `benchmark` | 性能评测 | Coremark、Dhrystone 等基准与跑分 |
+| `application` | 应用与综合 | 系统构建、大模型、复杂应用等（也作未知 frontmatter 的兜底） |
 
 ## 6. 与支持矩阵的关系
 

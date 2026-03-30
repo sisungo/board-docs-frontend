@@ -34,13 +34,13 @@ type BoardMeta = {
 从 `test-doc/{BoardDir}/{ExampleDir}/*.md`（排除 README）的 frontmatter 解析：
 
 ```typescript
-type ExampleStatus = "basics" | "peripheral" | "others";
+type ExampleStatus = "basics" | "peripheral" | "benchmark" | "application";
 
 type ExampleMeta = {
   boardSlug: string;     // 所属板子 slug
   slug: string;          // 示例目录名，如 "HelloWorld"
   title: string;         // 优先用目录名（见 docs/design.md §4 标题规则），fallback 到 # 标题
-  status: ExampleStatus; // basics / peripheral / others
+  status: ExampleStatus; // basics | peripheral | benchmark | application
   sys: string;           // "buildroot" / "revyos" 等
   lastUpdate?: string;   // "2025-03-19"
   mdFile: string;        // 相对路径，用于读取正文
