@@ -23,8 +23,15 @@ if (!board) {
   return Astro.redirect("/");
 }
 
-const rawIntroMd = getBoardReadmeBody(board.slug, "zh") ?? "";
-const introMd = rawIntroMd ? stripDuplicateHeading(rawIntroMd, board.product) : "";
+const rawIntroMdZh = getBoardReadmeBody(board.slug, "zh") ?? "";
+const introMdZh = rawIntroMdZh ? stripDuplicateHeading(rawIntroMdZh, board.product) : "";
+
+// Some boards have a zh README that only contains a duplicated H1 (no body),
+// which becomes empty after stripping. In that case, fall back to the en README.
+const rawIntroMdEn = getBoardReadmeBody(board.slug, "en") ?? "";
+const introMdEn = rawIntroMdEn ? stripDuplicateHeading(rawIntroMdEn, board.product) : "";
+
+const introMd = introMdZh || introMdEn;
 const introHtml = introMd ? await renderMarkdownToHtml(introMd) : "";
 
 const sv = board.socVendor ?? "Unknown";

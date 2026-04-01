@@ -342,7 +342,9 @@ function boardReadmeKey(slug: string, kind: "en" | "zh"): string | undefined {
 
 /** Strip the first `# …` heading if it matches the board product name (avoids duplication with page header). */
 export function stripDuplicateHeading(body: string, product: string): string {
-  const m = body.match(/^(#\s+(.+))(\r?\n)/);
+  // Support both "\n" and EOF right after the first heading line.
+  // Some README_zh.md files are a single H1 line with no trailing newline.
+  const m = body.match(/^(#\s+(.+))(\r?\n|$)/);
   if (!m) return body;
   const normalize = (s: string) =>
     s
