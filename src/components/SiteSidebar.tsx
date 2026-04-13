@@ -144,7 +144,7 @@ export function SiteSidebar({ boards, className }: SiteSidebarProps) {
                   </div>
 
                   {vendorOpen && (
-                    <div className="ml-2">
+                    <div className="ml-3">
                       {vg.chips.map((cg) => {
                         const chipKey = `${vg.siliconVendor}::${cg.cpu}`;
                         const chipOpen = expandedChips.has(chipKey);
@@ -171,7 +171,7 @@ export function SiteSidebar({ boards, className }: SiteSidebarProps) {
                             </div>
 
                             {chipOpen && (
-                              <div className="ml-2">
+                              <div className="ml-3">
                                 {cg.boards.map((b) => (
                                   <a
                                     key={b.slug}

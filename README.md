@@ -36,7 +36,7 @@ pnpm preview
 
 - `docs/` — 设计（`design.md`）、计划（`plan.md`）等  
 - `src/` — 页面、组件、`lib/data.ts`（读 `test-doc`）  
-- `test-doc/` — 示例内容（git submodule）  
+- `test-doc/` — 板卡文档内容（git submodule，来自 `ruyisdk/board-docs`）  
 - `support-matrix-frontend/` — 参考用 submodule，勿改其代码  
 
 ## 内容与路由
@@ -45,11 +45,13 @@ pnpm preview
 
 `test-doc/LicheePi4A/Coremark/example_Coremark_LPi4A.md`
 
+内容仓库里可能还会有 `templates/`（用于贡献者写文档的模板/PR 模板等），**站点不会展示它**（不会出现在侧栏/搜索，也不会生成 `/boards/templates/` 路由）。
+
 路由：`/` → `/boards/{board}/` → `/boards/{board}/{example}/`（另有厂商 / SoC 聚合页，见 `docs/design.md`）。
 
 ## 更新内容子模块（test-doc）
 
-站点内容来自 `test-doc/` 子模块。**部署到 ruyisdk.org 前**，建议在构建前更新子模块（不要在运行时自动 `git pull`）。
+站点内容来自 `test-doc/` 子模块（`ruyisdk/board-docs`）。**部署到 ruyisdk.org 前**，建议在构建前更新子模块（不要在运行时自动 `git pull`）。
 
 ```bash
 cd test-doc
