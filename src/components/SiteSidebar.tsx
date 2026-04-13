@@ -105,7 +105,7 @@ export function SiteSidebar({ boards, className }: SiteSidebarProps) {
           {!collapsed && (
             <Input
               type="search"
-              placeholder="搜索开发板、厂商、SoC、核心……"
+              placeholder="搜索开发板、厂商、SoC、核心等…"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
               className="h-8 text-sm"

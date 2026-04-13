@@ -27,7 +27,7 @@ export default function BoardsHome({ boards }: BoardsHomeProps) {
         <div className="mx-auto mt-6 max-w-lg">
           <Input
             type="search"
-            placeholder="搜索开发板、厂商、SoC、核心……"
+            placeholder="搜索开发板、厂商、SoC、核心等…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             aria-label="搜索开发板"
