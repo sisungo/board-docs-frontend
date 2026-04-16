@@ -1,0 +1,20 @@
+{
+  "name": "webview-postmessage-tester",
+  "displayName": "WebView PostMessage Tester",
+  "version": "0.0.1",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onCommand:webviewTester.open"],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "webviewTester.open",
+        "title": "WebView Tester: Open"
+      }
+    ]
+  }
+}
