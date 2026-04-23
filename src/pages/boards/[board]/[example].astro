@@ -93,18 +93,13 @@ const sourceDocUrl = `/${rawDocPath}`;
         const profile = button.dataset.profile ?? "";
         const sourceDocUrl = button.dataset.sourceDocUrl ?? "";
         const url = sourceDocUrl ? new URL(sourceDocUrl, window.location.origin).href : window.location.href;
-        const vscode =
-          typeof window.acquireVsCodeApi === "function"
-            ? window.acquireVsCodeApi()
-            : window.vscode;
 
-        if (!vscode?.postMessage) return;
-        vscode.postMessage({
+        window.parent.postMessage({
           type: "copilot",
           url,
           model,
           profile,
-        });
+        }, '*');
       });
     }
   }
